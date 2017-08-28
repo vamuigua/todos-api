@@ -20,14 +20,20 @@ class ItemsController < ApplicationController
 
   # PUT /todos/:todo_id/items/:id
   def update
-    @item.update(item_params)
-    head :no_content
+    if @item.update!(item_params)
+      render status:200, json: {
+        message:"Item successfully updated!"
+      }
+    end
   end
 
   # DELETE /todos/:todo_id/items/:id
   def destroy
-    @item.destroy
-    head :no_content
+    if @item.destroy
+      render status:200, json:{
+        message:"Item successfully deleted!"
+      }
+    end
   end
 
   private
